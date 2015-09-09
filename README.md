@@ -2,11 +2,19 @@
 
 ## Description
 
-...
+This is a resource cookbook that hosts a LWRP that supports configuration of
+Windows dynamic DNS updates with the following (string) actions:
+* dns
+* dynamic_dns_reg
+And the following string attribute:
+* inet_resolution_needed (yes or no.  default is 'no')
 
 ## Usage
 
-Add 'recipe[win_dyndns::default]' to your node's run-list.
+
+win_dyndns 'default' do
+  action :dns
+end
 
 ## Recipes
 
