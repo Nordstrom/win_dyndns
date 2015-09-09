@@ -16,6 +16,12 @@ win_dyndns 'default' do
   action :dns
 end
 
+## WARNING
+
+* This cookbook assumes your hostname follows a naming standard that includes
+* a location code as part of the hostname.  It's codified in the default
+* attributes file.
+
 ## Recipes
 
 ### default
