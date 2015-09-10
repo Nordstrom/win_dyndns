@@ -4,7 +4,7 @@
 
 require 'spec_helper'
 
-describe command("schtasks.exe /query | findstr #{schedule_taskname}") do
+describe command('((Get-WmiObject win32_networkadapterconfiguration | ?{$_.IPenabled -eq $true}) | select FullDNSRegistrationEnabled).FullDNSRegistrationEnabled') do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match(/^"#{schedule_taskname}"/) }
+  its(:stdout) { should match(/^True/) }
 end
