@@ -7,15 +7,15 @@ def assign_dns
   host_name = node['hostname'].to_s
   if new_resource.inet_resolution_needed.eql?('yes')
     if is_corp_campus?(host_name)
-      dns_servers_arr = node['wse_util']['DnsCorpInet']
+      dns_servers_arr = node['win_dyndns']['DnsCorpInet']
     else
-      dns_servers_arr = node['wse_util']['DnsNonCorpInet']
+      dns_servers_arr = node['win_dyndns']['DnsNonCorpInet']
     end
   else
     if is_corp_campus?(host_name)
-      dns_servers_arr = node['wse_util']['DnsCorpNoInet']
+      dns_servers_arr = node['win_dyndns']['DnsCorpNoInet']
     else
-      dns_servers_arr = node['wse_util']['DnsNonCorpNoInet']
+      dns_servers_arr = node['win_dyndns']['DnsNonCorpNoInet']
     end
   end
   dns_servers = arr_to_str(dns_servers_arr)
@@ -28,12 +28,14 @@ def assign_dns
        $NICs = Get-WMIObject Win32_NetworkAdapterConfiguration |where{$_.IPEnabled -eq "TRUE"}
        Foreach($NIC in $NICs)
         {
-        $message += $NIC.SetDNSServerSearchOrder(@($dns_servers_list)) | Out-String   # set the DNS IPs and capture output to string
+        # set the DNS IPs and capture output to string
+        $message += $NIC.SetDNSServerSearchOrder(@($dns_servers_list)) | Out-String
         }
       }catch{
         $message += "An error occcured while setting NIC object." + "`n`rError: $_";
       }
-      #write-host $message #if necessary, display result messages
+      #if necessary, display result messages
+      #write-host $message
     EOH
   end
 end
