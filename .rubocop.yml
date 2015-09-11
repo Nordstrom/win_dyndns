@@ -34,9 +34,5 @@ Metrics/LineLength:
     - '**/test/integration/default/serverspec/recipes/default_spec.rb'
     - '**/libraries/default.rb'
 
-Style/AccessorMethodName:
-  Exclude:
-    - libraries/matchers.rb
-
 Metrics/MethodLength:
   Max: 20
