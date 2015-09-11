@@ -1,7 +1,7 @@
 win_dyndns 'default' do
-  action :dns
+  action :enable
 end
 
 win_dyndns 'default' do
-  action :dynamic_dns_reg
+  action :disable
 end

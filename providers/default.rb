@@ -11,32 +11,32 @@ end
 
 use_inline_resources
 
-action :dns do
+action :enable do
   if @current_resource.exists
     Chef::Log.info 'Already set - nothing to do.'
   else
     converge_by("Create #{@new_resource}") do
-      assign_dns
+      enable_dynamic_dns_reg
       new_resource.updated_by_last_action true
     end
   end
 end
 
-action :dynamic_dns_reg do
+action :disable do
   if @current_resource.exists
     Chef::Log.info 'Already set - nothing to do.'
   else
     converge_by("Create #{@new_resource}") do
-      set_dynamic_dns_reg
+      disable_dynamic_dns_reg
       new_resource.updated_by_last_action true
     end
   end
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::WseUtilWindowsNetwork.new(@new_resource.name)
+  @current_resource = Chef::Resource::WinDynDns.new(@new_resource.name)
   @current_resource.name(@new_resource.name)
-  @current_resource.inet_resolution_needed(@new_resource.inet_resolution_needed)
-  return unless dns_configured?(@current_resource.inet_resolution_needed)
+  @current_resource.enable_dyndns_reg(@new_resource.enable_dyndns_reg)
+  @current_resource.disable_dyndns_reg(@new_resource.disable_dyndns_reg)
   @current_resource.exists = true
 end

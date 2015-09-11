@@ -17,9 +17,7 @@
 # limitations under the License.
 #
 
-actions :dns, :dynamic_dns_reg
-default_action :dns
-
-attribute :inet_resolution_needed, kind_of: String, default: 'no'
+actions :enable, :disable
+default_action :enable
 
 attr_accessor :exists

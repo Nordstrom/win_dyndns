@@ -8,8 +8,3 @@ describe command('((Get-WmiObject win32_networkadapterconfiguration | ?{$_.IPena
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match(/^True/) }
 end
-
-describe command('((Get-WmiObject win32_networkadapterconfiguration | ?{$_.IPenabled -eq $true}) | select DNSServerSearchOrder).DNSServerSearchOrder[0]') do
-  its(:exit_status) { should eq 0 }
-  its(:stdout) { should match(/^#{dns_servers_arr[0]}/) }
-end
