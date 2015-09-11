@@ -34,7 +34,7 @@ action :disable do
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::WinDynDns.new(@new_resource.name)
+  @current_resource = Chef::Resource::WinDyndns.new(@new_resource.name)
   @current_resource.name(@new_resource.name)
   @current_resource.enable_dyndns_reg(@new_resource.enable_dyndns_reg)
   @current_resource.disable_dyndns_reg(@new_resource.disable_dyndns_reg)
