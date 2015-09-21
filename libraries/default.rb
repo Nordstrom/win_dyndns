@@ -3,7 +3,7 @@ module Windows
   # helpers for the win_dyndns LWRP
   module Dyndns
     def config_exists?(*)
-      setting = new_resource.setting
+      setting = new_resource.name
       Chef::Log.info "Checking for existence of dynamic DNS option: #{setting}"
       @exists ||= begin
         cmd = powershell_out('(gwmi win32_networkadapterconfiguration | ?{$_.IPenabled -eq $true} | select FullDNSRegistrationEnabled).FullDNSRegistrationEnabled')

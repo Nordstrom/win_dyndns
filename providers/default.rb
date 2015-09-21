@@ -28,7 +28,6 @@ end
 
 def load_current_resource
   @current_resource = Chef::Resource::WinDyndns.new(@new_resource.name)
-  @current_resource.name(@new_resource.name)
-  @current_resource.setting(@new_resource.setting)
+  @current_resource.name(@new_resource.setting)
   @current_resource.exists = config_exists?(@current_resource.name)
 end
