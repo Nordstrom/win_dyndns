@@ -3,21 +3,19 @@
 ## Description
 
 This is a resource cookbook that hosts a LWRP that supports configuration of
-Windows dynamic DNS updates with the following (string) actions:
-* enable (default)
-* disable
+Windows dynamic DNS updates with the following (string) action:
+* action :set (default)
+* setting 'True' (default) or 'False'
 
 ## Usage
 
-
 win_dyndns 'default' do
-  action :enable
+  setting 'True'
 end
 
 ## WARNING
 
-* This cookbook only works on single-NIC systems, and exits with a zero status
-* if more than one NIC is found.
+* This cookbook only validated on single-NIC systems.
 
 ## Author
 
