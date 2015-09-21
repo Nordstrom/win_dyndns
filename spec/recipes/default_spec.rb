@@ -1,11 +1,7 @@
 RSpec.describe 'testsetup::default' do
   include ChefRun
 
-  it 'enables dynamic DNS registration on the client' do
-    expect(chef_run).to enable_win_dyndns('default')
-  end
-
-  it 'disables dynamic DNS registration on the client' do
-    expect(chef_run).to disable_win_dyndns('default')
+  it 'converges successfully' do
+    expect(chef_run).to include_recipe(described_recipe)
   end
 end

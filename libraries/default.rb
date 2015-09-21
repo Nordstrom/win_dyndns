@@ -1,31 +1,20 @@
-def enable_dynamic_dns_reg
-  powershell_script 'enable_dynamic_dns_reg_script' do
-    code <<-EOH
-    $nics = ((Get-WmiObject win32_networkadapterconfiguration | ?{$_.IPenabled -eq $true}) | select IPAddress)
-    if($nic.count -eq 1) {
-      $nics.SetDynamicDNSRegistration($true)
-      }
-    else{
-      # gracefully bail out
-      echo "Multiple NIC adapters. Unable to set dyanmic dns attribute"
-      exit 0
-    }
-    EOH
-  end
-end
 
-def disable_dynamic_dns_reg
-  powershell_script 'disable_dynamic_dns_reg_script' do
-    code <<-EOH
-    $nics = ((Get-WmiObject win32_networkadapterconfiguration | ?{$_.IPenabled -eq $true}) | select IPAddress)
-    if($nic.count -eq 1) {
-      $nics.SetDynamicDNSRegistration($false)
-      }
-    else{
-      # gracefully bail out
-      echo "Multiple NIC adapters. Unable to set dyanmic dns attribute"
-      exit 0
-    }
-    EOH
+module Windows
+  # helpers for the win_dyndns LWRP
+  module Dyndns
+    def config_exists?(*)
+      setting = new_resource.setting
+      Chef::Log.info "Checking for existence of dynamic DNS option: #{setting}"
+      @exists ||= begin
+        cmd = powershell_out('(gwmi win32_networkadapterconfiguration | ?{$_.IPenabled -eq $true} | select FullDNSRegistrationEnabled).FullDNSRegistrationEnabled')
+        cmd.stderr.empty? && cmd.stdout.include?(setting)
+      end
+    end
+
+    def config_dyndns
+      setting = '$' + new_resource.setting
+      Chef::Log.info "Setting dynamic DNS registration to #{setting}"
+      powershell_out("(gwmi win32_networkadapterconfiguration | ?{$_.IPenabled -eq $true}).SetDynamicDNSRegistration(#{setting})", returns: [0])
+    end
   end
 end

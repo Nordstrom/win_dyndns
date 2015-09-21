@@ -1,7 +1,3 @@
 win_dyndns 'default' do
-  action :enable
-end
-
-win_dyndns 'default' do
-  action :disable
+  setting 'True'
 end

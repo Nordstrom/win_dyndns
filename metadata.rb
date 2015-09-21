@@ -9,4 +9,5 @@ license          'all_rights'
 description      'Configures Windows dynamic DNS registration setting'
 version          '0.1.1'
 
+depends 'windows', '~> 1.38'
 depends 'wse_powershell_helper', '~> 0.1'
