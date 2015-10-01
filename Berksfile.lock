@@ -1,0 +1,15 @@
+DEPENDENCIES
+  testsetup
+    path: test/fixtures/cookbooks/testsetup
+  win_dyndns
+    path: .
+    metadata: true
+
+GRAPH
+  testsetup (0.0.0)
+    win_dyndns (>= 0.0.0)
+  win_dyndns (1.0.2)
+    wse_powershell_helper (~> 0.1)
+  win_shadowcopy (0.1.0)
+    wse_powershell_helper (~> 0.1)
+  wse_powershell_helper (0.1.2)
