@@ -1,5 +1,9 @@
 # Revision History for win_dyndns
 
+## 1.0.1
+
+* version bump for supermarket build
+
 ## 1.0.0
 
 * initial release, working as-advertised

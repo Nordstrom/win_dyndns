@@ -5,7 +5,6 @@
 #
 
 include Chef::Mixin::ShellOut
-include Windows::Helper
 include Windows::Dyndns
 
 # Support whyrun
