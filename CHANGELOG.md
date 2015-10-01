@@ -2,7 +2,7 @@
 
 ## 1.0.1
 
-* version bump for supermarket build
+* version bump for supermarket build, removed windows cookbook depends
 
 ## 1.0.0
 
