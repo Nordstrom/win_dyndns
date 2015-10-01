@@ -1,6 +1,6 @@
 # Revision History for win_dyndns
 
-## 1.0.1
+## 1.0.1 and 1.0.2
 
 * version bump for supermarket build, removed windows cookbook depends
 
