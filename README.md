@@ -19,7 +19,6 @@ end
 
 ## Author
 
-* Dave Viebrock
 * Nordstrom, Inc.
 
 ## License
